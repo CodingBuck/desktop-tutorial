@@ -1,51 +1,34 @@
-import logo from './logo.svg';
-import { useEffect, useState } from 'react';
-import jwt_decode from 'jwt-decode';
+import React from 'react';
 import './App.css';
+import Home from './Home'
+import Header from './Header'
+import Footer from './Footer'
+import SearchPage from './SearchPage'
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+
 
 function App() {
-  const [user, setUser] = useState({});
-
-  function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token: " + response.crendential);
-    var userObject = jwt_decode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById("signInDiv").hidden = false;
-  }
-
-  function handleSignOut(event) {
-     setUser({});
-  }
-
-  useEffect(() => {
-    /* global google */ 
-    google.account.id.initialize({
-      client_id: "435664134418-mn5bk2a6jmirsh1vnjlcka0ovif2k8ct.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large"}
-    );
-
-    google.account.id.prompt();
-  }, []);
-
   return (
+
+    //BEM
     <div className="App">
-      <div id="signInDiv"></div>
-      { Object.keys(user).length != 0 &&
-      <button onClick={ (e) => handleSignOut(e)}>Sign Out</button>
-      }
-    { user &&
-      <div>
-        <img src = {user.picture}></img>
-        <h3>{user.name}</h3>
-      </div>
-      }
+      {/*  AIRBNB clone!*/}   
+     <Router>       
+        <Header />
+
+        <Switch>
+          <Route path="/search">
+            <SearchPage />
+          </Route>
+          <Route path= "/">
+            <Home />
+          </Route>
+        </Switch>
+
+        <Footer />
+     </Router> 
     </div>
   );
-    }
+}
+
 export default App;
