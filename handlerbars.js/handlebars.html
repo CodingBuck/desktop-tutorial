@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handlerbars</title>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
+    <script src="handlebars_guide.js"></script>
+</head>
+<body>
+    <scrip type="text/x-hanlebars-template" id="template">
+        <h1>{{title}}</h1>
+        <ol>
+            {{#each list}}  {{!//For Loop}}
+              <li> {{this.name}}</li>
+            {{/each}}
+        </ol>
+        <p>{{footer}}</p>
+    </scrip>
+    <div id="ouput">
+
+    </div>
+    <button onclick="fill_template()">
+        fill template
+    </button>
+</body>
+</html>
